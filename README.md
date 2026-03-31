@@ -1,73 +1,360 @@
-# Neverlose UI Library — Roblox Lua
-A Roblox Lua UI library styled after the Neverlose CS2 cheat menu. Features acrylic blur, animated toggles, color pickers, config saving, and a full tab/section/element system.
-Table of Contents
-```
-Setup
-Window
-Tabs & Sub-Tabs
-Sections
-Elements
-Toggle
-Slider
-Dropdown
-Colorpicker
-Toggle + Colorpicker
-Dropdown + Colorpicker
-Accordion
-Settings Panel (per-element)
-Settings: Toggle
-Settings: Checkbox
-Settings: Slider
-Settings: Dropdown
-Settings: Colorpicker
-Accordion Elements
-Accordion: Toggle
-Accordion: Slider
-Accordion: Dropdown
-Config System
-Available Icons
-```
-# Setup
-Wrap the library and call Library:AddWindow(...) to get started:
+# TABLE OF CONTENTS
+
+- Setup  
+- Window  
+- Tabs and Sub-Tabs  
+- Sections  
+- Elements  
+- Toggle  
+- Slider  
+- Dropdown  
+- Colorpicker  
+- Toggle and Colorpicker  
+- Dropdown and Colorpicker  
+- Accordion  
+- Settings Panel (per-element)  
+- Settings: Toggle  
+- Settings: Checkbox  
+- Settings: Slider  
+- Settings: Dropdown  
+- Settings: Colorpicker  
+- Accordion Elements  
+- Config System  
+- Available Icons  
+
+---
+
+# SETUP
+
+Wrap the library and call `Library:AddWindow(...)` to get started:
+
+```lua
 local Window = Library:AddWindow(hubTitle, hubImage, gameTitle)
-Parameter
-Type
-Description
-hubTitle
-string
-Title shown in the header
-hubImage
-string
-rbxassetid for the header logo
-gameTitle
-string
-Game name shown in the header
-Toggle the UI: Press H or click the floating Close [H] button.
-Window
+```
+
+Parameters:  
+- hubTitle – Title shown in the header  
+- hubImage – rbxassetid for the header logo  
+- gameTitle – Game name shown in the header  
+
+Toggle the UI: Press H or click the floating Close [H] button  
+
+---
+
+# WINDOW
+
+```lua
 local Window = Library:AddWindow("Neverlose", "rbxassetid://...", "Counter Strike 2")
-The window includes:
-Acrylic blur background
-FPS and ping (MS) overlay
-User avatar + username display
-Window settings panel (main color picker, UI scale, language)
-Config save/load system
-Search bar (filters all elements by name)
-Tabs & Sub-Tabs
-AddTab
+```
+
+Includes:  
+- Acrylic blur background  
+- FPS and ping overlay  
+- User avatar and username display  
+- Settings panel (color picker, UI scale, language)  
+- Config save/load system  
+- Search bar  
+
+---
+
+# TABS AND SUB-TABS
+
+```lua
 local MyTab = Window:AddTab(name, icon)
-Parameter
-Type
-Description
-name
-string
-Tab label text
-icon
-string
-Icon name (see Available Icons)
-AddTabLabel
-Inserts a non-clickable separator/label between tabs in the sidebar.
 Window:AddTabLabel("Common")
-AddSubTab
+local SubTab = MyTab:AddSubTab(name, icon)
+```
+
+Example:
+
+```lua
+local LegitTab = Window:AddTab("Legit", "crosshair")
+
+Window:AddTabLabel("Common")
+
+local VisualsTab = Window:AddTab("Visuals", "image")
+local PlayersSubTab = VisualsTab:AddSubTab("Players", "user")
+local WorldSubTab = VisualsTab:AddSubTab("World", "earth")
+```
+
+---
+
+# SECTIONS
+
+```lua
+local Section = Tab:AddSection(title, side)
+```
+
+side = "left" or "right"
+
+Example:
+
+```lua
+local AimbotSection = LegitTab:AddSection("AIMBOT", "left")
+local TriggerSection = LegitTab:AddSection("TRIGGERBOT", "right")
+```
+
+---
+
+# ELEMENTS
+
+All elements are added to a Section.
+
+---
+
+# TOGGLE
+
+```lua
+local toggle = Section:AddToggle(text, default, callback)
+```
+
+Methods:
+- toggle:Set(value)
+- toggle:Get()
+- toggle:AddSettings()
+
+Example:
+
+```lua
+local bhop = Section:AddToggle("Bunny Hop", false, function(v)
+    print(v)
+end)
+```
+
+---
+
+# SLIDER
+
+```lua
+local slider = Section:AddSlider(text, min, max, default, callback, suffix)
+```
+
+Example:
+
+```lua
+local fov = Section:AddSlider("FOV", 0, 180, 90, function(v)
+    print(v)
+end, "°")
+```
+
+---
+
+# DROPDOWN
+
+```lua
+local dropdown = Section:AddDropdown(text, options, default, callback)
+```
+
+Example:
+
+```lua
+local hitbox = Section:AddDropdown("Hitbox", {"Head", "Chest", "Legs"}, "Head", function(v)
+    print(v)
+end)
+```
+
+---
+
+# COLORPICKER
+
+```lua
+local picker = Section:AddColorpicker(text, defaultColor, callback)
+```
+
+Example:
+
+```lua
+local color = Section:AddColorpicker("Chams Color", Color3.fromRGB(255,100,100), function(c)
+    print(c)
+end)
+```
+
+---
+
+# TOGGLE + COLORPICKER
+
+```lua
+Section:AddToggleColorpicker(text, defaultEnabled, defaultColor, callback, colorCallback)
+```
+
+Example:
+
+```lua
+Section:AddToggleColorpicker("Bullet Impacts", false, Color3.fromRGB(255,100,100),
+    function(v) print(v) end,
+    function(c) print(c) end
+)
+```
+
+---
+
+# DROPDOWN + COLORPICKER
+
+```lua
+Section:AddDropdownColorpicker(text, options, defaultColor, callback, colorCallback)
+```
+
+Example:
+
+```lua
+Section:AddDropdownColorpicker("Log Events", {"All", "Hits", "Deaths"}, Color3.fromRGB(255,255,255),
+    function(v) print(v) end
+)
+```
+
+---
+
+# ACCORDION
+
+```lua
+local acc = Section:AddAccordion(text)
+```
+
+Example:
+
+```lua
+local accScope = ViewSection:AddAccordion("Scope Options")
+accScope:AddToggle("Remove Scope", false, function(v) print(v) end)
+accScope:AddSlider("Zoom Level", 1, 10, 5, function(v) print(v) end)
+```
+
+---
+
+# SETTINGS PANEL
+
+```lua
+local settings = toggle:AddSettings()
+```
+
+Supports:
+- Toggle  
+- Checkbox  
+- Slider  
+- Dropdown  
+- Colorpicker  
+
+Example:
+
+```lua
+local grenadeTrajectory = Section:AddToggle("Grenade Trajectory", false, function(v)
+    print(v)
+end)
+
+local s = grenadeTrajectory:AddSettings()
+s:AddCheckbox("Only Teammates", false, function(v) print(v) end)
+s:AddSlider("Thickness", 1, 5, 2, function(v) print(v) end)
+```
+
+---
+
+# ACCORDION ELEMENTS
+
+```lua
+acc:AddToggle("Option", false, function(v) end)
+acc:AddSlider("Value", 1, 10, 5, function(v) end)
+acc:AddDropdown("Mode", {"A", "B"}, "A", function(v) end)
+```
+
+---
+
+# CONFIG SYSTEM
+
+Features:
+- Create named configs  
+- Save and load configs  
+- Duplicate configs  
+- Delete configs  
+- Search configs  
+- Auto-save every 30 seconds  
+
+Supported types:
+- boolean  
+- number  
+- string  
+- Color3  
+
+---
+
+# AVAILABLE ICONS
+
+ads  
+list  
+folder  
+earth  
+locked  
+home  
+mouse  
+user  
+cosmetics  
+sun  
+shop  
+farm  
+code  
+crosshair  
+image  
+layers  
+side  
+grenade  
+bio  
+camera  
+car  
+run  
+box  
+carcolor  
+avacolor  
+locker  
+retry  
+gun  
+sword  
+knife  
+egg  
+sprinkler  
+gear  
+
+---
+
+# FULL EXAMPLE
+
+```lua
+local Window = Library:AddWindow("Neverlose", "", "Counter Strike 2")
+
+local LegitTab = Window:AddTab("Legit", "crosshair")
+
+local AimbotSection = LegitTab:AddSection("AIMBOT", "left")
+local TriggerSection = LegitTab:AddSection("TRIGGERBOT", "right")
+
+local aimbotToggle = AimbotSection:AddToggle("Enable Aimbot", false, function(v)
+    print(v)
+end)
+
+aimbotToggle:AddSettings()
+
+AimbotSection:AddDropdown("Bone", {"Head", "Chest", "Stomach"}, "Head", function(v)
+    print(v)
+end)
+
+local fov = AimbotSection:AddSlider("FOV", 0, 180, 90, function(v)
+    print(v)
+end, "°")
+
+fov:AddSettings()
+
+Window:AddTabLabel("Common")
+
+local VisualsTab = Window:AddTab("Visuals", "image")
+local PlayersSubTab = VisualsTab:AddSubTab("Players", "user")
+
+local PlayersSection = PlayersSubTab:AddSection("PLAYERS", "left")
+
+PlayersSection:AddToggle("ESP Enabled", false, function(v)
+    print(v)
+end)
+
+PlayersSection:AddToggleColorpicker("Chams", false, Color3.fromRGB(255,100,100),
+    function(v) print(v) end,
+    function(c) print(c) end
+)
+```AddSubTab
 Adds a sub-tab row inside a tab (renders as a horizontal sub-nav bar).
 local SubTab = MyTab:AddSubTab(name, icon)
 Example:
