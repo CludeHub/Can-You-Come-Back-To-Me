@@ -9,7 +9,7 @@
 
 # Source
 ```lua
-loadstring(game:HttpGet("  "))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CludeHub/Can-You-Come-Back-To-Me/refs/heads/main/NEVERLOSE-CS2-SOURCE.lua"))()
 ```
 
 # TABLE OF CONTENTS
@@ -330,6 +330,9 @@ gear
 # FULL EXAMPLE
 
 ```lua
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CludeHub/Can-You-Come-Back-To-Me/refs/heads/main/NEVERLOSE-CS2-SOURCE.lua"))()
+
 local Window = Library:AddWindow("Neverlose", "rbxassetid://118608145176297", "Counter Strike 2")
 
 Window:AddTabLabel("Aimbot")
