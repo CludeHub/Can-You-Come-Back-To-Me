@@ -9,7 +9,7 @@
 
 # Source
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/CludeHub/Can-You-Come-Back-To-Me/refs/heads/main/NEVERLOSE-CS2-SOURCE.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/CludeHub/Can-You-Come-Back-To-Me/refs/heads/main/NEVERLOSE-CS2-SOURCE.lua"))()
 ```
 
 # TABLE OF CONTENTS
