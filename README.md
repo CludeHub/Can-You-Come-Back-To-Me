@@ -156,13 +156,16 @@ end, "°")
 # DROPDOWN
 
 ```lua
-local dropdown = Section:AddDropdown(text, options, default, callback)
+local dropdown = Section:AddDropdown(text, options, callback)
 ```
+
+Methods:
+- dropdown:AddSettings()
 
 Example:
 
 ```lua
-local hitbox = Section:AddDropdown("Hitbox", {"Head", "Chest", "Legs"}, "Head", function(v)
+local hitbox = Section:AddDropdown("Hitbox", {"Head", "Chest", "Legs"}, function(v)
     print(v)
 end)
 ```
@@ -205,7 +208,7 @@ Section:AddToggleColorpicker("Bullet Impacts", false, Color3.fromRGB(255,100,100
 # DROPDOWN + COLORPICKER
 
 ```lua
-Section:AddDropdownColorpicker(text, options, defaultColor, callback, colorCallback)
+Section:AddDropdownColorpicker(text, options, defaultColor, callback)
 ```
 
 Example:
@@ -261,12 +264,85 @@ s:AddSlider("Thickness", 1, 5, 2, function(v) print(v) end)
 
 ---
 
+# SETTINGS: TOGGLE
+
+```lua
+settings:AddToggle(text, default, callback)
+```
+
+Example:
+
+```lua
+local s = myToggle:AddSettings()
+s:AddToggle("Force Shoot", false, function(v) print(v) end)
+```
+
+---
+
+# SETTINGS: CHECKBOX
+
+```lua
+settings:AddCheckbox(text, default, callback)
+```
+
+Example:
+
+```lua
+s:AddCheckbox("Only Teammates", false, function(v) print(v) end)
+```
+
+---
+
+# SETTINGS: SLIDER
+
+```lua
+settings:AddSlider(text, min, max, default, callback)
+```
+
+Example:
+
+```lua
+s:AddSlider("Thickness", 1, 5, 2, function(v) print(v) end)
+```
+
+---
+
+# SETTINGS: DROPDOWN
+
+```lua
+settings:AddDropdown(text, options, callback)
+```
+
+Example:
+
+```lua
+s:AddDropdown("Auto Stop", {"Early", "In air", "Between Shot", "Force Accurate"}, function(v)
+    print(v)
+end)
+```
+
+---
+
+# SETTINGS: COLORPICKER
+
+```lua
+settings:AddColorpicker(text, defaultColor, callback)
+```
+
+Example:
+
+```lua
+s:AddColorpicker("Color", Color3.fromRGB(255,255,255), function(c) print(c) end)
+```
+
+---
+
 # ACCORDION ELEMENTS
 
 ```lua
 acc:AddToggle("Option", false, function(v) end)
 acc:AddSlider("Value", 1, 10, 5, function(v) end)
-acc:AddDropdown("Mode", {"A", "B"}, "A", function(v) end)
+acc:AddDropdown("Mode", {"A", "B"}, function(v) end)
 ```
 
 ---
@@ -330,7 +406,6 @@ gear
 # FULL EXAMPLE
 
 ```lua
-
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/CludeHub/Can-You-Come-Back-To-Me/refs/heads/main/NEVERLOSE-CS2-SOURCE.lua"))()
 
 local Window = Library:AddWindow("Neverlose", "rbxassetid://118608145176297", "Counter Strike 2")
@@ -380,7 +455,7 @@ local dropMultipoint = SelectionSection:AddDropdown("Multipoint", {"Head, Chest,
 	print("Multipoint:", v)
 end)
 local brr = dropMultipoint:AddSettings()
-brr:AddSlider("Multipoint", 0,100,79, function(val)
+brr:AddSlider("Multipoint", 0, 100, 79, function(val)
 end)
 
 local sliderHitChance = SelectionSection:AddSlider("Hit Chance", 0, 100, 60, function(v)
@@ -397,69 +472,9 @@ local toggleQuickStop = SelectionSection:AddToggle("Quick Stop", true, function(
 	print("Quick Stop:", v)
 end)
 
-
 local patapim = toggleQuickStop:AddSettings()
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
+patapim:AddDropdown("Auto Stop", {"Early", "In air", "Between Shot", "Force Accurate"}, function(val)
 end)
-
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
-patapim:AddDropdown("Auto Stop", { "Early","In air","Between Shot","Force Accurate"}, function(val)
-end)
-
 
 SelectionSection:AddToggle("Quick Scope", true, function(v)
 	print("Quick Scope:", v)
@@ -525,14 +540,12 @@ end)
 
 local LegitTab = Window:AddTab("Legit", "mouse")
 
--- MAIN Section (left)
 local LegitMainSection = LegitTab:AddSection("MAIN", "left")
 
 LegitMainSection:AddToggle("Enabled", true, function(v)
 	print("Legit Enabled:", v)
 end)
 
--- AIMBOT Section (left)
 local LegitAimbotSection = LegitTab:AddSection("AIMBOT", "left")
 
 LegitAimbotSection:AddToggle("Enabled", true, function(v)
@@ -582,7 +595,6 @@ local legitQuickScope = LegitAimbotSection:AddToggle("Quick Scope", false, funct
 end)
 legitQuickScope:AddSettings()
 
--- TRIGGERBOT Section (right)
 local LegitTriggerbotSection = LegitTab:AddSection("TRIGGERBOT", "right")
 
 LegitTriggerbotSection:AddToggle("Enabled", false, function(v)
@@ -621,7 +633,6 @@ local tbQuickScope = LegitTriggerbotSection:AddToggle("Quick Scope", false, func
 end)
 tbQuickScope:AddSettings()
 
--- OTHER Section (right)
 local LegitOtherSection = LegitTab:AddSection("OTHER", "right")
 
 local tbVisualize = LegitOtherSection:AddToggle("Visualize", false, function(v)
@@ -646,12 +657,10 @@ end)
 Window:AddTabLabel("Common")
 local VisualsTab = Window:AddTab("Visuals", "image")
 
--- Sub-tabs: Players, World (active in image), Inventory
 local PlayersSubTab = VisualsTab:AddSubTab("Players", "user")
 local WorldSubTab   = VisualsTab:AddSubTab("World", "earth")
 local InventorySubTab = Window:AddTab("Inventory", "layers")
 
--- Players sub-tab sections
 local PlayersSection = PlayersSubTab:AddSection("PLAYERS", "left")
 PlayersSection:AddToggle("ESP Enabled", false, function(v) print("Players ESP:", v) end)
 PlayersSection:AddToggle("Skeletons", false, function(v) print("Skeletons:", v) end)
@@ -662,7 +671,6 @@ PlayersRightSection:AddToggle("Health Bar", false, function(v) print("Health Bar
 PlayersRightSection:AddToggle("Name Tag", false, function(v) print("Name Tag:", v) end)
 PlayersRightSection:AddToggle("Distance", false, function(v) print("Distance:", v) end)
 
--- World sub-tab sections (VIEW left, WORLD ESP left, HUD right, MISC right — matching image)
 local ViewSection = WorldSubTab:AddSection("VIEW", "left")
 
 local accViewOptions = ViewSection:AddAccordion("View Options")
@@ -715,11 +723,11 @@ MiscVisSection:AddToggleColorpicker("Bullet Impacts", false, Color3.fromRGB(255,
 	print("Bullet Impacts:", v)
 end, function(c) print("Bullet Impacts Color:", c) end)
 
--- Inventory sub-tab
 local InventorySection = InventorySubTab:AddSection("SKINS", "left")
 InventorySection:AddToggle("Skin Changer", false, function(v) print("Skin Changer:", v) end)
 InventorySection:AddToggle("Knife Changer", false, function(v) print("Knife Changer:", v) end)
 InventorySection:AddToggle("Glove Changer", false, function(v) print("Glove Changer:", v) end)
+
 local MiscTab = Window:AddTab("Miscellaneous", "gear")
 
 local MovementSection = MiscTab:AddSection("MOVEMENT", "left")
@@ -763,7 +771,6 @@ MovementSection:AddToggle("Fast Ladder", false, function(v)
 	print("Fast Ladder:", v)
 end)
 
--- FEATURES Section (right)
 local FeaturesSection = MiscTab:AddSection("FEATURES", "right")
 
 FeaturesSection:AddToggle("Quick Switch", false, function(v)
@@ -802,8 +809,6 @@ end)
 FeaturesSection:AddToggle("Auto-Accept Matchmaking", false, function(v)
 	print("Auto-Accept Matchmaking:", v)
 end)
-
-
 
 FeaturesSection:AddDropdownColorpicker("Log Events", {"Select", "All", "Hits", "Deaths"}, Color3.fromRGB(255,255,255), function(v)
 	print("Log Events:", v)
